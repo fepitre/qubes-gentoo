@@ -112,7 +112,7 @@ pkg_postinst() {
     update_qubesconfig
 
     mkdir -p /usr/lib/modules
-    ln -s /usr/lib/modules /lib/
+    ln -sf /usr/lib/modules /lib/
     systemctl enable qubes-ensure-lib-modules.service
 
     if [ -e /etc/init/serial.conf ] && ! [ -f /var/lib/qubes/serial.orig ]; then
@@ -244,7 +244,7 @@ update_default_user() {
 configure_notification_daemon() {
     # Enable autostart of notification-daemon when installed
     if [ ! -L /etc/xdg/autostart/notification-daemon.desktop ]; then
-        ln -s /usr/share/applications/notification-daemon.desktop /etc/xdg/autostart/
+        ln -sf /usr/share/applications/notification-daemon.desktop /etc/xdg/autostart/
     fi
 }
 
@@ -399,7 +399,7 @@ configure_systemd() {
         # The fewer deviations of the template from the seed
         # image, the better.
         rm -f /etc/systemd/system/default.target
-        ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+        ln -sf /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
         changed=true
     fi
 
