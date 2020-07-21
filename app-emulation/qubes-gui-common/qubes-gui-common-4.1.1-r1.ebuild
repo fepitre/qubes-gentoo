@@ -21,6 +21,11 @@ DEPEND=""
 RDEPEND=""
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_install() {
     insinto 'usr/include'
     doins 'include/qubes-gui-protocol.h'

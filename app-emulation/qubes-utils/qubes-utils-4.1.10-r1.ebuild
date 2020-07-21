@@ -26,6 +26,11 @@ DEPEND="media-gfx/imagemagick
 RDEPEND=""
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_compile() {
     myopt="${myopt} DESTDIR="${D}" BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
     emake ${myopt} all

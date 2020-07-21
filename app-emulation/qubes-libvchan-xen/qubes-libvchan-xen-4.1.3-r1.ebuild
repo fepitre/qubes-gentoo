@@ -21,6 +21,11 @@ DEPEND=">=app-emulation/xen-tools-4.13"
 RDEPEND=""
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_compile() {
     myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
     emake ${myopt} all

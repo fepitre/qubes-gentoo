@@ -21,6 +21,11 @@ DEPEND="app-emulation/qubes-libvchan-xen"
 RDEPEND=""
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_compile() {
     myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen"
     emake ${myopt} all

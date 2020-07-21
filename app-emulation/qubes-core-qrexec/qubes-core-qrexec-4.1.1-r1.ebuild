@@ -28,6 +28,11 @@ DEPEND="dev-python/setuptools
 RDEPEND="$DEPEND"
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_compile() {
     sed -i 's/postlogin/system-auth/g' agent/qrexec.pam
 

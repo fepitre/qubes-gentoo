@@ -33,6 +33,11 @@ DEPEND="app-emulation/qubes-libvchan-xen
 RDEPEND=""
 PDEPEND=""
 
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    eapply_user
+}
+
 src_compile() {
     # Fix PAM
     sed -i 's/postlogin/system-auth/g' appvm-scripts/etc/pam.d/qubes-gui-agent
