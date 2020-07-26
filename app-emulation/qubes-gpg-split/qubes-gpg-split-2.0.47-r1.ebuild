@@ -2,12 +2,12 @@
 
 EAPI=6
 
-inherit git-r3 eutils multilib
+inherit git-r3 eutils multilib qubes
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-app-linux-split-gpg.git"
 EGIT_COMMIT="v${PV}"
 DESCRIPTION="The Qubes service for secure gpg seperation"
@@ -18,21 +18,17 @@ SLOT="0"
 IUSE=""
 
 DEPEND="app-emulation/qubes-libvchan-xen
+        app-text/pandoc
         "
-# WIP: currently ignore pandoc for time saving
-#        app-text/pandoc"
 RDEPEND=""
 PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    default
 }
 
 src_compile() {
-    # WIP: currently disable pandoc
-    sed -i 's/pandoc -s -f rst -t man/touch/' doc/Makefile
-
     # Remove related /var/run
     sed -i 's|/etc/tmpfiles\.d/|/usr/lib/tmpfiles.d/|g' Makefile
 	sed -i '/^.*\/var\/run\/.*$/d' Makefile

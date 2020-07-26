@@ -7,7 +7,7 @@ inherit git-r3 eutils multilib qubes
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-core-agent-linux.git"
 EGIT_COMMIT="v${PV}"
 DESCRIPTION="The Qubes core files for installation inside a Qubes VM"
@@ -19,12 +19,14 @@ IUSE="networking network-manager passwordless-root"
 
 DEPEND="app-emulation/qubes-libvchan-xen
         app-emulation/qubes-db
+        app-emulation/qubes-utils
         dev-lang/python
         net-misc/socat
         x11-misc/notification-daemon
         x11-misc/xdg-utils
         sys-apps/gentoo-systemd-integration
         gnome-extra/zenity
+        app-text/pandoc
         networking? (
             sys-apps/ethtool
             sys-apps/net-tools
@@ -37,12 +39,15 @@ DEPEND="app-emulation/qubes-libvchan-xen
             )
         )
         "
-RDEPEND="app-emulation/qubes-utils"
+RDEPEND=""
 PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    # https://github.com/QubesOS/qubes-core-agent-linux/pull/239
+    eapply "${FILESDIR}"/0001-Drop-legacy-xen-entry-in-fstab.patch
+
+    default
 }
 
 src_compile() {
@@ -51,9 +56,6 @@ src_compile() {
 
     # Fix modules-load.d path
     sed -i 's|$(SYSLIBDIR)/modules-load.d|$(LIBDIR)/modules-load.d|g' Makefile
-
-    # WIP: currently disable pandoc
-    sed -i 's/pandoc -s -f rst -t man/touch/' doc/Makefile
 
     # Fix for network tools paths
     sed -i 's:/sbin/ifconfig:/bin/ifconfig:g' network/*

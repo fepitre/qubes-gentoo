@@ -2,7 +2,7 @@
 
 EAPI=6
 
-inherit git-r3 eutils multilib
+inherit git-r3 eutils multilib qubes
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
@@ -23,7 +23,7 @@ PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    default
 }
 
 src_install() {

@@ -2,12 +2,12 @@
 
 EAPI=6
 
-inherit git-r3 eutils multilib
+inherit git-r3 eutils multilib qubes
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-core-vchan-xen.git"
 EGIT_COMMIT="v${PV}"
 DESCRIPTION="QubesOS libvchan cross-domain communication library"
@@ -23,7 +23,7 @@ PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    default
 }
 
 src_compile() {

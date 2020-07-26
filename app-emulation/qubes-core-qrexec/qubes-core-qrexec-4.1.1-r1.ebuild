@@ -2,12 +2,12 @@
 
 EAPI=6
 
-inherit git-r3 eutils multilib
+inherit git-r3 eutils multilib qubes
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-core-qrexec.git"
 EGIT_COMMIT="v${PV}"
 DESCRIPTION="The Qubes qrexec files (qube side)"
@@ -22,23 +22,22 @@ DEPEND="dev-python/setuptools
         dev-python/sphinx
         dev-python/dbus-python
         sys-libs/pam
-        app-emulation/qubes-libvchan-xen"
-# WIP: currently ignore pandoc for time saving
-#        app-text/pandoc"
-RDEPEND="$DEPEND"
+        app-emulation/qubes-libvchan-xen
+        app-text/pandoc
+        "
+RDEPEND=""
 PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    default
 }
 
 src_compile() {
+    # Fix PAM
     sed -i 's/postlogin/system-auth/g' agent/qrexec.pam
 
     myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen PYTHON=python3 LIBDIR=/usr/$(get_libdir)"
-    # WIP: currently ignore pandoc for time saving
-    myopt="${myopt} PANDOC=touch"
     emake ${myopt} all-base
     emake ${myopt} all-vm
 }

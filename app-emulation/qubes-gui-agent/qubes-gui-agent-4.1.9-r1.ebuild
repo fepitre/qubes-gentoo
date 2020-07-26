@@ -2,12 +2,12 @@
 
 EAPI=6
 
-inherit git-r3 eutils multilib
+inherit git-r3 eutils multilib qubes
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-gui-agent-linux.git"
 EGIT_COMMIT="v${PV}"
 DESCRIPTION="The Qubes GUI Agent for AppVMs"
@@ -35,7 +35,7 @@ PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    eapply_user
+    default
 }
 
 src_compile() {
@@ -60,14 +60,6 @@ src_compile() {
 src_install() {
     emake ${myopt} install-rh-agent
 
-    # Remove useless file from install-rh-agent
-    ${myopt} rm -f "$DESTDIR/etc/sysconfig/desktop"
-
-    # Only for XFCE desktop flavor
-    if ! use xfce; then
-        ${myopt} rm -f "$DESTDIR/etc/X11/xinit/xinitrc.d/60xfce-desktop.sh"
-    fi
-
     insopts -m 0755
     insinto /etc/X11/Sessions/
     doins "${FILESDIR}/Qubes"
@@ -79,6 +71,14 @@ src_install() {
 
 pkg_postinst() {
     systemctl enable qubes-gui-agent.service
+
+    # Remove useless file from install-rh-agent
+    rm -f /etc/sysconfig/desktop
+
+    # Only for XFCE desktop flavor
+    if ! use xfce; then
+        rm -f /etc/X11/xinit/xinitrc.d/60xfce-desktop.sh
+    fi
 
     sed -i '/^autospawn/d' /etc/pulse/client.conf
     echo autospawn=no >> /etc/pulse/client.conf
