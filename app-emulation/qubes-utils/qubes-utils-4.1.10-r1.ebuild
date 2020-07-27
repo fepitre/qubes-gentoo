@@ -23,7 +23,7 @@ DEPEND="media-gfx/imagemagick
         dev-python/numpy
         app-emulation/qubes-libvchan-xen
         "
-RDEPEND=""
+RDEPEND="${DEPEND}"
 PDEPEND=""
 
 src_prepare() {

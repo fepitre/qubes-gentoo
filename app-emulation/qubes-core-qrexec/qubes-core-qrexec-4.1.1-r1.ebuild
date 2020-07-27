@@ -25,7 +25,7 @@ DEPEND="dev-python/setuptools
         app-emulation/qubes-libvchan-xen
         app-text/pandoc
         "
-RDEPEND=""
+RDEPEND="${DEPEND}"
 PDEPEND=""
 
 src_prepare() {

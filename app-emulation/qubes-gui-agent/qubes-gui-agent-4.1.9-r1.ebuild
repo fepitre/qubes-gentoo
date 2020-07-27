@@ -30,7 +30,7 @@ DEPEND="app-emulation/qubes-libvchan-xen
         media-sound/alsa-utils
         media-sound/pulseaudio
         "
-RDEPEND=""
+RDEPEND="${DEPEND}"
 PDEPEND=""
 
 src_prepare() {

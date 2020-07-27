@@ -18,7 +18,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND=">=app-emulation/xen-tools-4.13"
-RDEPEND=""
+RDEPEND="${DEPEND}"
 PDEPEND=""
 
 src_prepare() {

@@ -18,7 +18,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="app-emulation/qubes-libvchan-xen"
-RDEPEND=""
+RDEPEND="${DEPEND}"
 PDEPEND=""
 
 src_prepare() {
