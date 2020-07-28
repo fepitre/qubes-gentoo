@@ -2,7 +2,9 @@
 
 EAPI=7
 
-inherit git-r3 eutils multilib qubes
+PYTHON_COMPAT=( python3_{7,8,9} )
+
+inherit git-r3 eutils multilib distutils-r1 qubes
 
 if [[ ${PV} == *9999 ]]; then
 	EGIT_COMMIT=HEAD
@@ -20,7 +22,9 @@ LICENSE="GPLv2"
 SLOT="0"
 IUSE=""
 
-DEPEND="app-emulation/qubes-libvchan-xen"
+DEPEND="app-emulation/qubes-libvchan-xen
+        ${PYTHON_DEPS}
+        "
 RDEPEND="${DEPEND}"
 PDEPEND=""
 

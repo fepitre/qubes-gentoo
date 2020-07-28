@@ -2,7 +2,9 @@
 
 EAPI=7
 
-inherit git-r3 eutils multilib qubes
+PYTHON_COMPAT=( python3_{7,8,9} )
+
+inherit git-r3 eutils multilib distutils-r1 qubes
 
 if [[ ${PV} == *9999 ]]; then
 	EGIT_COMMIT=HEAD
@@ -23,7 +25,6 @@ IUSE="networking network-manager passwordless-root"
 DEPEND="app-emulation/qubes-libvchan-xen
         app-emulation/qubes-db
         app-emulation/qubes-utils
-        dev-lang/python
         net-misc/socat
         x11-misc/notification-daemon
         x11-misc/xdg-utils
@@ -41,6 +42,7 @@ DEPEND="app-emulation/qubes-libvchan-xen
                 net-firewall/nftables
             )
         )
+        ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"
 PDEPEND=""
@@ -66,7 +68,7 @@ src_compile() {
     sed -i 's:/sbin/ethtool:/usr/sbin/ethtool:g' network/*
     sed -i 's:/sbin/ip:/bin/ip:g' network/*
 
-    myopt="${myopt} DESTDIR="${D}" SYSTEMD=1 BACKEND_VMM=xen PYTHON=python3"
+    myopt="${myopt} DESTDIR="${D}" SYSTEMD=1 BACKEND_VMM=xen"
     for dir in qubes-rpc misc; do
         emake ${myopt} -C "$dir"
     done
@@ -255,7 +257,7 @@ configure_notification_daemon() {
 
 configure_selinux() {
     if [ -e /etc/selinux/config ]; then
-        sed -i 's/^SELINUX=.*$/SELINUX=disabled/' /etc/selinux/config
+        sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
         setenforce 0 2>/dev/null
     fi
 }

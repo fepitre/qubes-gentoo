@@ -2,7 +2,9 @@
 
 EAPI=7
 
-inherit git-r3 eutils multilib qubes
+PYTHON_COMPAT=( python3_{7,8,9} )
+
+inherit git-r3 eutils multilib distutils-r1 qubes
 
 if [[ ${PV} == *9999 ]]; then
 	EGIT_COMMIT=HEAD
@@ -21,12 +23,13 @@ SLOT="0"
 IUSE=""
 
 
-DEPEND="dev-python/setuptools
-        dev-python/sphinx
-        dev-python/dbus-python
+DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
+        dev-python/sphinx[${PYTHON_USEDEP}]
+        dev-python/dbus-python[${PYTHON_USEDEP}]
         sys-libs/pam
         app-emulation/qubes-libvchan-xen
         app-text/pandoc
+        ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"
 PDEPEND=""
@@ -40,7 +43,7 @@ src_compile() {
     # Fix PAM
     sed -i 's/postlogin/system-auth/g' agent/qrexec.pam
 
-    myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen PYTHON=python3 LIBDIR=/usr/$(get_libdir)"
+    myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
     emake ${myopt} all-base
     emake ${myopt} all-vm
 }
