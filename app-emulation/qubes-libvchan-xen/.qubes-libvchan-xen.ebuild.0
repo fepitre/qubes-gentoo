@@ -20,7 +20,7 @@ LICENSE="GPLv2"
 SLOT="0"
 IUSE=""
 
-DEPEND=">=app-emulation/xen-tools-4.13"
+DEPEND="<app-emulation/xen-tools-4.14"
 RDEPEND="${DEPEND}"
 PDEPEND=""
 
