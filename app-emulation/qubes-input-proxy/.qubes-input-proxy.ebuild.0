@@ -12,10 +12,10 @@ else
 	EGIT_COMMIT="v${PV}"
 fi
 
-EGIT_REPO_URI="https://github.com/QubesOS/qubes-app-linux-split-gpg.git"
+EGIT_REPO_URI="https://github.com/QubesOS/qubes-app-linux-input-proxy.git"
 
 KEYWORDS="amd64"
-DESCRIPTION="The Qubes service for secure gpg separation"
+DESCRIPTION="Simple input device proxy"
 HOMEPAGE="http://www.qubes-os.org"
 LICENSE="GPLv2"
 
@@ -23,7 +23,7 @@ SLOT="0"
 IUSE=""
 
 DEPEND="app-emulation/qubes-libvchan-xen
-        app-text/pandoc
+        sys-apps/usbutils
         ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"
@@ -35,14 +35,10 @@ src_prepare() {
 }
 
 src_compile() {
-    # Remove related /var/run
-    sed -i 's|/etc/tmpfiles\.d/|/usr/lib/tmpfiles.d/|g' Makefile
-	sed -i '/^.*\/var\/run\/.*$/d' Makefile
-
     myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
-	emake ${myopt} build
+	emake ${myopt} all
 }
 
 src_install() {
-	emake ${myopt} install-vm
+	emake ${myopt} install
 }
