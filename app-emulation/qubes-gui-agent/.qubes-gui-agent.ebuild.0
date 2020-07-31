@@ -23,6 +23,7 @@ SLOT="0"
 IUSE="xfce"
 
 DEPEND="app-emulation/qubes-libvchan-xen
+        app-emulation/qubes-db
         app-emulation/qubes-gui-common
         x11-base/xorg-x11
         x11-libs/libXdamage
