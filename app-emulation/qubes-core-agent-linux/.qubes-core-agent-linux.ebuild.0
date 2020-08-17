@@ -49,8 +49,6 @@ PDEPEND=""
 
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
-    # https://github.com/QubesOS/qubes-core-agent-linux/pull/239
-    eapply "${FILESDIR}"/0001-Drop-legacy-xen-entry-in-fstab.patch
 
     default
 }
