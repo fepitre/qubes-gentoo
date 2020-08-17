@@ -182,7 +182,11 @@ pkg_prerm() {
         mv /var/lib/qubes/fstab.orig /etc/fstab
     fi
 
-    mv /var/lib/qubes/removed-udev-scripts/* /etc/udev/rules.d/
+    for f in /var/lib/qubes/removed-udev-scripts/*
+    do
+        mv /var/lib/qubes/removed-udev-scripts/"$f" /etc/udev/rules.d/
+    done
+
     if [ -e /var/lib/qubes/removed-modules-load.d/xen.conf ]; then
         mv /var/lib/qubes/removed-modules-load.d/xen.conf /usr/lib/modules-load.d/xen.conf
     fi
