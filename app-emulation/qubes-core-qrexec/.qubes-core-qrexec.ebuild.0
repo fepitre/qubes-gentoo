@@ -20,7 +20,7 @@ HOMEPAGE="http://www.qubes-os.org"
 LICENSE="GPLv2"
 
 SLOT="0"
-IUSE=""
+IUSE="pandoc-bin"
 
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
@@ -28,7 +28,12 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
         dev-python/dbus-python[${PYTHON_USEDEP}]
         sys-libs/pam
         app-emulation/qubes-libvchan-xen
-        app-text/pandoc
+        pandoc-bin? (
+            app-text/pandoc-bin
+        )
+        !pandoc-bin? (
+            app-text/pandoc
+        )
         ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"

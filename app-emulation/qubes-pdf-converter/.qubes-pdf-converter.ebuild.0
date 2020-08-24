@@ -20,13 +20,18 @@ HOMEPAGE="http://www.qubes-os.org"
 LICENSE="GPLv2"
 
 SLOT="0"
-IUSE=""
+IUSE="pandoc-bin"
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]
         dev-python/sphinx[${PYTHON_USEDEP}]
         dev-python/click[${PYTHON_USEDEP}]
         dev-python/tqdm[${PYTHON_USEDEP}]
-        app-text/pandoc
+        pandoc-bin? (
+            app-text/pandoc-bin
+        )
+        !pandoc-bin? (
+            app-text/pandoc
+        )
         ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"

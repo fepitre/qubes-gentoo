@@ -20,7 +20,7 @@ HOMEPAGE="http://www.qubes-os.org"
 LICENSE="GPLv2"
 
 SLOT="0"
-IUSE="networking network-manager passwordless-root"
+IUSE="networking network-manager passwordless-root pandoc-bin"
 
 DEPEND="app-emulation/qubes-libvchan-xen
         app-emulation/qubes-db
@@ -30,7 +30,12 @@ DEPEND="app-emulation/qubes-libvchan-xen
         x11-misc/xdg-utils
         sys-apps/gentoo-systemd-integration
         gnome-extra/zenity
-        app-text/pandoc
+        pandoc-bin? (
+            app-text/pandoc-bin
+        )
+        !pandoc-bin? (
+            app-text/pandoc
+        )
         networking? (
             sys-apps/ethtool
             sys-apps/net-tools
