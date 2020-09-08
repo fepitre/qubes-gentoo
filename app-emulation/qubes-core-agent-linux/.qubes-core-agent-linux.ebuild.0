@@ -83,6 +83,7 @@ src_install() {
     emake ${myopt} -C filesystem install
     emake ${myopt} -C misc install
     emake ${myopt} -C qubes-rpc install
+    emake ${myopt} -C package-managers install
     if use passwordless-root; then
         emake ${myopt} -C passwordless-root install
     fi
