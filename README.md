@@ -15,7 +15,7 @@ qubes-gentoo
 
 \# mkdir /var/db/repos/qubes
 
-/etc/portage/repos.conf
+Edit the file */etc/portage/repos.conf*. For example: 
 ```
     [qubes]
     location = /var/db/repos/qubes
