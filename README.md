@@ -5,7 +5,7 @@ qubes-gentoo
 
 ## List of Packages ##
 
-* **app-text/pandoc-bin**. Compiling and updating *app-text/pandoc* can be tedious, particularly if you are not interested in other Haskell packages (see [1](https://bugs.gentoo.org/565364) and [2](https://forums.gentoo.org/viewtopic-t-1111514-highlight-pandoc.html). This package provides a binary package for *app-text/pandoc*.
+* **app-text/pandoc-bin**. Compiling and updating *app-text/pandoc* can be tedious, particularly if you are not interested in other Haskell packages (see [1](https://bugs.gentoo.org/565364) and [2](https://forums.gentoo.org/viewtopic-t-1111514-highlight-pandoc.html)). This package provides a binary package for *app-text/pandoc*.
 
 
 ## Installation ##
