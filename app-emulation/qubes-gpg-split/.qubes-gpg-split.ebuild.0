@@ -37,6 +37,7 @@ PDEPEND=""
 src_prepare() {
     qubes_verify_sources_git "${EGIT_COMMIT}"
     default
+    eapply "${FILESDIR}"/gpg-client-pipe-cat-is-built-under-lib64.patch
 }
 
 src_compile() {
