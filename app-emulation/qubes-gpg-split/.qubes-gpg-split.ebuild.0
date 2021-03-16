@@ -43,7 +43,9 @@ src_prepare() {
 src_compile() {
     # Remove related /var/run
     sed -i 's|/etc/tmpfiles\.d/|/usr/lib/tmpfiles.d/|g' Makefile
-	sed -i '/^.*\/var\/run\/.*$/d' Makefile
+    sed -i '/^.*\/var\/run\/.*$/d' Makefile
+    # Ensure qubes.Gpg service script will use the correct path
+    sed -i "s|/usr/lib/qubes-gpg-split|/usr/$(get_libdir)/qubes-gpg-split|" qubes.Gpg.service
 
     myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
 	emake ${myopt} build
