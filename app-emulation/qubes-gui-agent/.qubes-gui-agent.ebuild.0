@@ -17,7 +17,7 @@ EGIT_REPO_URI="https://github.com/QubesOS/qubes-gui-agent-linux.git"
 KEYWORDS="amd64"
 DESCRIPTION="The Qubes GUI Agent for AppVMs"
 HOMEPAGE="http://www.qubes-os.org"
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 
 SLOT="0"
 IUSE="xfce"

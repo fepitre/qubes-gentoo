@@ -17,7 +17,7 @@ EGIT_REPO_URI="https://github.com/QubesOS/qubes-app-linux-img-converter.git"
 KEYWORDS="amd64"
 DESCRIPTION="The Qubes service for converting untrusted images into trusted ones"
 HOMEPAGE="http://www.qubes-os.org"
-LICENSE="GPLv2"
+LICENSE="GPL-2"
 
 SLOT="0"
 IUSE=""
