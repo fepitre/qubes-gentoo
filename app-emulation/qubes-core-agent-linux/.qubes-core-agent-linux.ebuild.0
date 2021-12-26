@@ -20,7 +20,7 @@ HOMEPAGE="http://www.qubes-os.org"
 LICENSE="GPL-2"
 
 SLOT="0"
-IUSE="networking network-manager passwordless-root pandoc-bin"
+IUSE="nautilus networking network-manager passwordless-root pandoc-bin"
 
 DEPEND="app-emulation/qubes-libvchan-xen
         app-emulation/qubes-db
@@ -46,6 +46,9 @@ DEPEND="app-emulation/qubes-libvchan-xen
                 net-misc/networkmanager
                 net-firewall/nftables
             )
+        )
+        nautilus? (
+            dev-python/nautilus-python
         )
         ${PYTHON_DEPS}
         "
@@ -86,6 +89,9 @@ src_install() {
     emake ${myopt} -C package-managers install
     if use passwordless-root; then
         emake ${myopt} -C passwordless-root install
+    fi
+    if use nautilus; then
+        emake ${myopt} -C qubes-rpc/nautilus install
     fi
 
     if use networking; then
