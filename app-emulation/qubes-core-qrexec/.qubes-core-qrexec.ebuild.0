@@ -12,6 +12,7 @@ else
 	EGIT_COMMIT="v${PV}"
 fi
 
+EGIT_BRANCH="release4.1"
 EGIT_REPO_URI="https://github.com/QubesOS/qubes-core-qrexec.git"
 
 KEYWORDS="amd64"
