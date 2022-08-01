@@ -14,4 +14,5 @@ NAME_app_linux_usb_proxy = qubes-usb-proxy
 NAME_app_linux_input_proxy = qubes-input-proxy
 NAME_app_linux_img_converter = qubes-img-converter
 NAME_app_linux_pdf_converter = qubes-pdf-converter
+NAME_app_shutdown_idle = qubes-shutdown-idle
 NAME_app_thunderbird = qubes-thunderbird
