@@ -1,0 +1,47 @@
+# Maintainer: Frédéric Pierret <frederic.pierret@qubes-os.org>
+
+EAPI=7
+
+PYTHON_COMPAT=( python3_{7..11} )
+
+inherit git-r3 eutils multilib distutils-r1 qubes
+
+if [[ ${PV} == *9999 ]]; then
+	EGIT_COMMIT=HEAD
+else
+	EGIT_COMMIT="v${PV}"
+fi
+
+EGIT_REPO_URI="https://github.com/QubesOS/qubes-app-u2f.git"
+
+KEYWORDS="amd64"
+DESCRIPTION="A secure forwarder for U2F messages"
+HOMEPAGE="http://www.qubes-os.org"
+LICENSE="GPL-2"
+
+SLOT="0"
+IUSE=""
+
+DEPEND="dev-python/fido2
+        ${PYTHON_DEPS}
+        "
+RDEPEND="${DEPEND}"
+PDEPEND=""
+
+src_prepare() {
+    qubes_verify_sources_git "${EGIT_COMMIT}"
+    default
+}
+
+src_compile() {
+    if [ "$(echo -e "${PV}\n1.2.10" |sort -Vr | head -n1)" = "1.2.10" ]; then 
+        sed -i 's/^import u2flib_host\.u2f/import fido2/m' qubesu2f/tools/__init__.py
+        sed -i 's/^import u2flib_host.\u2f/import fido2/m' qubesu2f/tests/conformance.py
+	fi
+    myopt="${myopt} DESTDIR=${D} SYSTEMD=1 BACKEND_VMM=xen LIBDIR=/usr/$(get_libdir)"
+	emake ${myopt} all
+}
+
+src_install() {
+	emake ${myopt} install
+}
