@@ -24,6 +24,7 @@ IUSE=""
 
 DEPEND="app-emulation/qubes-libvchan-xen
         media-gfx/imagemagick
+        dev-libs/icu
         dev-python/pycairo[${PYTHON_USEDEP}]
         dev-python/pillow[${PYTHON_USEDEP}]
         dev-python/numpy[${PYTHON_USEDEP}]
