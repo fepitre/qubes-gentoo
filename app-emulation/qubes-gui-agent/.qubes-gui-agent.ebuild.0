@@ -39,6 +39,7 @@ DEPEND="app-emulation/qubes-libvchan-xen
         media-libs/alsa-lib
         media-sound/alsa-utils
         media-sound/pulseaudio
+        media-video/pipewire
         ${PYTHON_DEPS}
         "
 RDEPEND="${DEPEND}"
