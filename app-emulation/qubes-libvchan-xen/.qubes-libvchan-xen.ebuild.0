@@ -2,7 +2,7 @@
 
 EAPI=7
 
-inherit git-r3 eutils multilib qubes
+inherit git-r3 multilib qubes
 
 if [[ ${PV} == *9999 ]]; then
 	EGIT_COMMIT=HEAD
