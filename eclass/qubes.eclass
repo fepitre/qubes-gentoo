@@ -3,9 +3,10 @@
 # Workaround for verifying git tags
 # Feature request: https://bugs.gentoo.org/733430
 qubes_verify_sources_git() {
-    QUBES_OVERLAY_DIR="$(portageq get_repo_path / qubes)"
+    # To override the default Qubes repository path, set QUBES_OVERLAY_DIR in your make.conf
+    LOCAL_QUBES_OVERLAY_DIR="${QUBES_OVERLAY_DIR:-/var/db/repos/qubes}"
     # Import Qubes developers keys
-    gpg --import "${QUBES_OVERLAY_DIR}/keys/qubes-developers-keys.asc" 2>/dev/null
+    gpg --import "${LOCAL_QUBES_OVERLAY_DIR}/keys/qubes-developers-keys.asc" 2>/dev/null
     # Trust Qubes Master Signing Key
     echo '427F11FD0FAA4B080123F01CDDFA1A3E36879494:6:' | gpg --import-ownertrust
 
