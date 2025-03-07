@@ -1,1 +1,0 @@
-.qubes-gui-common.ebuild.0
