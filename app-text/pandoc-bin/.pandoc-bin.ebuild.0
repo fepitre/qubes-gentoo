@@ -1,6 +1,6 @@
 # Maintainer: Frédéric Pierret <frederic.pierret@qubes-os.org>
 
-EAPI=7
+EAPI=8
 
 MY_PN="${PN//-bin/}"
 MY_P="${MY_PN}-${PV}"

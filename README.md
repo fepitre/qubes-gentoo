@@ -61,3 +61,12 @@ For example, to install *app-text/pandoc-bin*:
 \# echo "app-text/pandoc-bin ~amd64" >> /etc/portage/package.accept_keywords/pandoc-bin
 
 \# emerge -av app-text/pandoc-bin
+
+
+## Developper guide ##
+
+Update a package:
+- remove the last-2 ebuild
+- add the new ebuild : create a new symbolic link `.qube-xx`
+- build the package manifest : `ebuild <new ebuild file> manifest`
+- commit the new ebuild and the updated Manifest
